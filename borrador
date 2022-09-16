@@ -1,0 +1,34 @@
+import csv
+#def Partidosganados():
+#    nombre_equipos = []
+#    nombre_archivo = "futbol_python_1/partidos.csv"
+nombre_equipos = []
+nombre_archivo = "futbol_python_1/partidos.csv"
+equipoingresado = "England"
+partidosperdidosvisit = 0
+partidosganadosvisit = 0
+partidosempatados = 0
+
+
+with open(nombre_archivo, "r") as archivo:
+    partidos = csv.reader(archivo, delimiter=",")
+    next(partidos, None)
+
+
+    for resultado in partidos:    # --> recorre los departamentos
+        equipo = resultado[2]
+        gollocal = resultado[3]
+        golvisit = resultado[4]
+#        print(gollocal)
+#        print(equipo)
+        if resultado[2] == equipoingresado and resultado[3] < resultado[4]:
+#            print(resultado)
+            partidosganadosvisit = partidosganadosvisit + 1 
+        elif resultado[2] == equipoingresado and resultado[3] > resultado[4]:
+            partidosperdidosvisit = partidosperdidosvisit + 1
+        elif resultado[2] == equipoingresado and resultado[4] == resultado[3]:
+            partidosempatados = partidosempatados + 1
+
+print(f"Partidos ganados de visitante:", partidosganadosvisit)
+print(f"Partidos perdidos  de visitante:", partidosperdidosvisit)
+print(f"Partidos empatados visitante:", partidosempatados)

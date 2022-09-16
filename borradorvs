@@ -1,0 +1,36 @@
+import csv
+#Como le fue al país históricamente jugando contra otro país indicado.
+nombre_equipos = []
+nombre_archivo = "futbol_python_1/partidos.csv"
+equipoingresado = 'Brazil'
+equipoadversario = 'Argentina'
+partidosperdidos = 0
+partidosganados = 0
+partidosempatados = 0
+with open(nombre_archivo, "r") as archivo4:
+    partidos = list(csv.DictReader(archivo4))
+#    partidos = csv.reader(archivo, delimiter=",")
+
+# FUNCION PARA OBTENER RESULTADOS CONTRA UN EQUIPO ESPECIFICO
+    for objeto in partidos:
+        if objeto['home_team'] == equipoingresado and objeto['away_team'] == equipoadversario:
+            if objeto['home_score'] > objeto['away_score']: 
+                partidosganados = partidosganados +1    
+        if objeto['home_team'] == equipoingresado and objeto['away_team'] == equipoadversario:
+            if objeto['home_score'] < objeto['away_score']:
+                partidosperdidos = partidosperdidos +1    
+        if objeto['home_team'] == equipoingresado and objeto['away_team'] == equipoadversario:               
+            if objeto['away_score'] == objeto['home_score']:
+                partidosempatados = partidosempatados + 1
+        if objeto['away_team'] == equipoingresado and objeto['home_team'] == equipoadversario:               
+            if objeto['away_score'] == objeto['home_score']:        
+                partidosempatados = partidosempatados + 1
+        if objeto['away_team'] == equipoingresado and objeto['home_team'] == equipoadversario:
+            if objeto['away_score'] > objeto['home_score']:
+                partidosganados = partidosganados +1
+        if objeto['away_team'] == equipoingresado and objeto['home_team'] == equipoadversario:
+            if objeto['away_score'] < objeto['home_score']:
+                partidosperdidos = partidosperdidos + 1
+partidostotal=partidosempatados+partidosganados+partidosperdidos
+
+print(f"En el historial de {equipoingresado} contra {equipoadversario} jugaron un total de {partidostotal} donde {equipoingresado} gano {partidosganados}, perdio {partidosperdidos} y empataron {partidosempatados}")
